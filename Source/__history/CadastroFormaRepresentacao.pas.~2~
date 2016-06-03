@@ -1,0 +1,34 @@
+unit CadastroFormaRepresentacao;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, TemplateCadastro, DB, DBClient, StdCtrls, Buttons, Grids, DBGrids,
+  ComCtrls, ExtCtrls, Mask, DBCtrls;
+
+type
+  TfrmCadastroTemplate1 = class(TfrmCadastroTemplate)
+    cdsCadastroId: TIntegerField;
+    cdsCadastroNome: TStringField;
+    cdsCadastroDataCriacao: TDateTimeField;
+    dbedtNome: TDBEdit;
+    lbl2: TLabel;
+    dbedtDataCriacao1: TDBEdit;
+    lbl5: TLabel;
+    dbedtId: TDBEdit;
+    lbl1: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastroTemplate1: TfrmCadastroTemplate1;
+
+implementation
+
+{$R *.dfm}
+
+end.

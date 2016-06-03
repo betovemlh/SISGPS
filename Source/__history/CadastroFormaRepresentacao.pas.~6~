@@ -1,0 +1,71 @@
+unit CadastroFormaRepresentacao;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, TemplateCadastro, DB, DBClient, StdCtrls, Buttons, Grids, DBGrids,
+  ComCtrls, ExtCtrls, Mask, DBCtrls;
+
+type
+  TfrmCadastroTemplate1 = class(TfrmCadastroTemplate)
+    cdsCadastroId: TIntegerField;
+    cdsCadastroNome: TStringField;
+    cdsCadastroDataCriacao: TDateTimeField;
+    dbedtNome: TDBEdit;
+    lbl2: TLabel;
+    dbedtDataCriacao1: TDBEdit;
+    lbl5: TLabel;
+    dbedtId: TDBEdit;
+    lbl1: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure cdsCadastroNewRecord(DataSet: TDataSet);
+  private
+    { Private declarations }
+    function permiteGravar():Boolean;override;
+    function permiteExcluir():Boolean;override;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastroTemplate1: TfrmCadastroTemplate1;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrmCadastroTemplate1 }
+
+procedure TfrmCadastroTemplate1.cdsCadastroNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+  cdsCadastroDataCriacao.AsDateTime := now();
+end;
+
+procedure TfrmCadastroTemplate1.FormCreate(Sender: TObject);
+begin
+  CampoPrimario := 'id';
+  CaminhoTabelaXML := ExtractFilePath(Application.ExeName)+'\dados\FormaRepresentacao.xml';
+  inherited;
+end;
+
+function TfrmCadastroTemplate1.permiteExcluir: Boolean;
+begin
+  Result := true;
+end;
+
+function TfrmCadastroTemplate1.permiteGravar: Boolean;
+begin
+  Result := false;
+  if cdsCadastroNome.IsNull then
+    Application.MessageBox(Pchar('Nome não pode ser vazio'),
+                           Pchar(Application.Title),MB_ICONEXCLAMATION)
+  else if  cdsCadastroDataCriacao.IsNull then
+    Application.MessageBox(Pchar('Data não pode ser vazia'),
+                           Pchar(Application.Title),MB_ICONEXCLAMATION)
+  else
+    Result := true;
+end;
+
+end.

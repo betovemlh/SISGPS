@@ -1,0 +1,401 @@
+unit TemplateCadastro;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, cxButtons, ExtCtrls, cxPC, cxControls, Provider, DBClient, Db,
+  ADODB, cxGridLevel, cxClasses, cxGridCustomView, cxGridCustomTableView,
+  cxGridTableView, cxGridDBTableView, cxGrid, scExcelExport, cxLabel,
+  cxContainer, cxEdit, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxDBEdit;
+
+type
+  TfrmCadastroTemplate = class(TForm)
+    pnl2: TPanel;
+    pgControl: TcxPageControl;
+    tabConsulta: TcxTabSheet;
+    tabCadastro: TcxTabSheet;
+    qryCadastro: TADOQuery;
+    dsCadastro: TDataSource;
+    cdsCadastro: TClientDataSet;
+    dspCadastro: TDataSetProvider;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    cxGrid1: TcxGrid;
+    qryListagem: TADOQuery;
+    dsListagem: TDataSource;
+    excExport: TscExcelExport;
+    btnBuscar: TcxButton;
+    edtPesquisa: TcxMaskEdit;
+    cdsWhere: TClientDataSet;
+    cdsWhereteste: TBytesField;
+    comboCampoPesquisa: TcxComboBox;
+    cxlbl1: TcxLabel;
+    cxlbl2: TcxLabel;
+    pnl1: TPanel;
+    btnSair: TcxButton;
+    btnExcel: TcxButton;
+    btnExcluir: TcxButton;
+    btnNovo: TcxButton;
+    btnEditar: TcxButton;
+    pnl3: TPanel;
+    cxButton2: TcxButton;
+    cxButton6: TcxButton;
+    procedure btnSairClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure comboCampoPesquisaPropertiesChange(Sender: TObject);
+    procedure btnBuscarClick(Sender: TObject);
+    procedure comboCampoPesquisaPropertiesCloseUp(Sender: TObject);
+    procedure btnNovoClick(Sender: TObject);
+    procedure cxButton6Click(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+    procedure cxButton2Click(Sender: TObject);
+    procedure tabConsultaShow(Sender: TObject);
+    procedure edtPesquisaKeyPress(Sender: TObject; var Key: Char);
+    procedure cxGrid1DBTableView1DblClick(Sender: TObject);
+    procedure cdsCadastroReconcileError(DataSet: TClientDataSet;
+      E: EReconcileError; UpdateKind: TUpdateKind;
+      var Action: TReconcileAction);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+    FNomeWorkSheetExcel:String;
+    FNomeCabecalhoExcel:String;
+    FNomeTabela:String;
+    FCampoPrimario:String;
+    FLimiteRegistrosListagem:Integer;
+    FUsarTransacao:Boolean;
+        
+    procedure ExportaExcel();
+    procedure CarregaListagem(bWhere:Boolean);
+    function GetWhere():String;
+    procedure CarregaCamposWhereNoComboBox();
+    procedure   AlteraMascaraCampoDePesquisa(Campo:String);
+    function  getDisplayLabelToFieldName(DisplayLabel:String):String;
+    procedure   Novo();
+    procedure CarregaClientDataSetCadastro(ValorChavePrimaria:String);
+    procedure   Editar();
+    procedure Cancelar();
+    procedure  Gravar();
+  public
+    property NomeWorkSheetExcel:String read FNomeWorkSheetExcel write FNomeWorkSheetExcel ;
+    property NomeCabecalhoExcel:String read FNomeCabecalhoExcel write FNomeCabecalhoExcel ;
+    property NomeTabela:String read FNomeTabela write FNomeTabela ;
+    property CampoPrimario:String read FCampoPrimario write FCampoPrimario;
+    property LimiteRegistrosListagem:Integer read FLimiteRegistrosListagem write FLimiteRegistrosListagem;
+    property UsarTransacao:Boolean read FUsarTransacao write FUsarTransacao;
+    { Public declarations }
+    function permiteGravar():Boolean;Virtual;
+    function permiteExcluir():Boolean;Virtual;
+  end;
+
+var
+  frmCadastroTemplate: TfrmCadastroTemplate;
+
+implementation
+
+{$R *.DFM}
+uses ModDados;
+
+procedure TfrmCadastroTemplate.CarregaCamposWhereNoComboBox;
+var i:integer;
+begin
+  comboCampoPesquisa.Properties.Items.Clear();
+  comboCampoPesquisa.Properties.Items.Add('SEM FILTRO');
+  for i:=0 to qryListagem.Fields.Count-1 do
+  begin
+    //Se estiver visivel participará do WHERE
+    if (qryListagem.Fields[i].Visible) and (qryListagem.Fields[i].DisplayLabel<>qryListagem.Fields[i].FieldName)  then
+      comboCampoPesquisa.Properties.Items.Add(qryListagem.Fields[i].DisplayLabel);
+  end;
+  comboCampoPesquisa.ItemIndex := 0;
+end;
+
+procedure TfrmCadastroTemplate.CarregaListagem(bWhere:Boolean);
+begin
+  qryListagem.Close();
+  qryListagem.Sql.Clear();
+  if LimiteRegistrosListagem > 0 then
+    qryListagem.Sql.Add('select TOP '+IntToStr(LimiteRegistrosListagem)+' * from '+NomeTabela+' WHERE  0=0')
+  else
+    qryListagem.Sql.Add('select * from '+NomeTabela+' WHERE  0=0');
+  if bWhere then
+    qryListagem.Sql.Add(GetWhere);
+  qryListagem.Open();
+end;
+
+procedure TfrmCadastroTemplate.btnSairClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TfrmCadastroTemplate.btnExcluirClick(Sender: TObject);
+begin
+  if not qryListagem.FieldByName(CampoPrimario).isNull then
+    if Application.MessageBox('Deseja remover o registro selecionado?',
+      'SYSGER', MB_YESNO) = IDYES then
+    begin
+      Try
+        if permiteExcluir() then
+        begin
+          if UsarTransacao then begin
+            if dados.ADOConnection.InTransaction then
+              dados.ADOConnection.RollbackTrans;
+            dados.ADOConnection.BeginTrans();
+          end;
+          CarregaClientDataSetCadastro(qryListagem.FieldByName(CampoPrimario).AsString);
+          cdsCadastro.Delete();
+          cdsCadastro.ApplyUpdates(0);
+          if UsarTransacao then
+            dados.ADOConnection.CommitTrans();
+          CarregaListagem(True);
+        end;
+      except
+        on E:Exception do
+        begin
+          if UsarTransacao then
+            if dados.ADOConnection.InTransaction then
+              dados.ADOConnection.RollbackTrans;
+          Application.MessageBox(PChar('Ocorreu um erro:' + #13#10 + E.Message), 'SYSGER', MB_ICONWARNING);
+        end;
+      end
+    end;
+end;
+
+procedure TfrmCadastroTemplate.btnExcelClick(Sender: TObject);
+begin
+  ExportaExcel();
+end;
+
+procedure TfrmCadastroTemplate.ExportaExcel;
+begin
+  Try
+    if qryListagem.IsEmpty then
+    begin
+      Application.MessageBox(PChar('Nenhum registro para ser exportado.'), 'SYSGER', MB_ICONWARNING);
+      exit;
+    end;
+    excExport.Connectto := ctNewExcel;
+    excExport.Dataset            := qryListagem;
+    excExport.WorksheetName      := NomeWorkSheetExcel;
+    excExport.GroupFields.Clear;
+    excExport.HeaderText.Text    := NomeCabecalhoExcel;
+    excExport.ExportDataset;
+  finally
+    excExport.Disconnect;
+  end;
+end;
+
+procedure TfrmCadastroTemplate.FormCreate(Sender: TObject);
+begin
+  tabCadastro.TabVisible := false;
+  CarregaListagem(false);
+  CarregaCamposWhereNoComboBox();
+end;
+
+function TfrmCadastroTemplate.GetWhere: String;
+begin
+  Result := '';
+  if (comboCampoPesquisa.Itemindex>0) and (comboCampoPesquisa.Text<>'') then
+    Result :=' AND '+ getDisplayLabelToFieldName(comboCampoPesquisa.Text)+' like ' +QuotedStr('%'+edtPesquisa.Text+'%');
+end;
+
+procedure TfrmCadastroTemplate.comboCampoPesquisaPropertiesChange(Sender: TObject);
+begin
+  if (comboCampoPesquisa.ItemIndex>0) and (comboCampoPesquisa.Text<> '') then
+    AlteraMascaraCampoDePesquisa(comboCampoPesquisa.Text);
+end;
+
+procedure TfrmCadastroTemplate.AlteraMascaraCampoDePesquisa(Campo:String);
+begin
+//  showmessage(qryListagem.FindField(Campo).DataType.);
+  case qryListagem.FindField(getDisplayLabelToFieldName(Campo)).DataType of
+    ftDate: edtPesquisa.Properties.EditMask := '!99/99/0000;1;_';
+    ftInteger:edtPesquisa.Properties.EditMask := '!99999;1;_';
+    ftString: edtPesquisa.Properties.EditMask:= '';
+    ftAutoInc:edtPesquisa.Properties.EditMask := '!99999;1;_';
+  else
+    edtPesquisa.Properties.EditMask := '';
+  end
+
+{  ftUnknown, , ftSmallint, , ftWord,
+    ftBoolean, ftFloat, ftCurrency, ftBCD, , ftTime, ftDateTime,
+    ftBytes, ftVarBytes, , ftBlob, ftMemo, ftGraphic, ftFmtMemo,
+    ftParadoxOle, ftDBaseOle, ftTypedBinary, ftCursor, ftFixedChar, ftWideString,
+    ftLargeint, ftADT, ftArray, ftReference, ftDataSet, ftOraBlob, ftOraClob,
+    ftVariant, ftInterface, ftIDispatch, ftGuid}
+end;
+
+procedure TfrmCadastroTemplate.btnBuscarClick(Sender: TObject);
+begin
+  if comboCampoPesquisa.ItemIndex=0 then
+    CarregaListagem(false)
+  else
+    CarregaListagem(True);
+end;
+
+procedure TfrmCadastroTemplate.comboCampoPesquisaPropertiesCloseUp(
+  Sender: TObject);
+begin
+  if (comboCampoPesquisa.ItemIndex>0) and (comboCampoPesquisa.Text<> '') then
+    AlteraMascaraCampoDePesquisa(comboCampoPesquisa.Text);
+end;
+
+function TFrmCadastroTemplate.getDisplayLabelToFieldName(DisplayLabel:String):String;
+var i:integer;
+begin
+  Result := '';
+  for i:=0 to qryListagem.Fields.Count-1 do
+  begin
+    if  qryListagem.Fields[i].DisplayLabel= DisplayLabel then
+    begin
+      Result := qryListagem.Fields[i].FieldName;
+      break;
+    end;   
+  end;
+end;
+
+procedure TfrmCadastroTemplate.btnNovoClick(Sender: TObject);
+begin
+  Novo();
+end;
+
+procedure TfrmCadastroTemplate.Novo;
+begin
+  tabCadastro.TabVisible := true;
+  pgControl.ActivePage := tabCadastro;
+  pgControl.Repaint();
+  CarregaClientDataSetCadastro('');
+end;
+
+procedure TfrmCadastroTemplate.CarregaClientDataSetCadastro(ValorChavePrimaria:String);
+begin
+  cdsCadastro.Close();
+  qryCadastro.Close();
+  qryCadastro.Sql.Clear();
+  if ValorChavePrimaria='' then
+    qryCadastro.Sql.Add('SELECT * FROM '+NomeTabela+' WHERE 0=1')
+  else
+    qryCadastro.Sql.Add('SELECT * FROM '+NomeTabela+' WHERE '+CampoPrimario+'='+QuotedStr(ValorChavePrimaria));
+  qryCadastro.Open();
+  cdsCadastro.Open();
+end;
+
+procedure TfrmCadastroTemplate.cxButton6Click(Sender: TObject);
+begin
+  Cancelar()
+end;
+
+procedure TfrmCadastroTemplate.btnEditarClick(Sender: TObject);
+begin
+  Editar();
+end;
+
+procedure TfrmCadastroTemplate.Editar;
+begin
+  if qryListagem.FieldByName(CampoPrimario).isNull then
+  begin
+    Application.MessageBox(PChar('Nenhum registro selecionado para edição.'), 'SYSGER', MB_ICONWARNING);
+    exit;
+  end;
+  tabCadastro.TabVisible := true;
+  pgControl.ActivePage := tabCadastro;
+  pgControl.Repaint();
+  CarregaClientDataSetCadastro(qryListagem.FieldByName(CampoPrimario).AsString);
+end;
+
+procedure TfrmCadastroTemplate.Cancelar;
+begin
+  cdsCadastro.Cancel();
+  pgControl.ActivePage := tabConsulta;
+  tabCadastro.TabVisible := false;
+  CarregaListagem(True);    
+end;
+
+procedure TfrmCadastroTemplate.cxButton2Click(Sender: TObject);
+begin
+  if permiteGravar then
+    Gravar();
+end;
+
+procedure TfrmCadastroTemplate.Gravar;
+begin
+  try
+    if UsarTransacao then begin
+      if dados.ADOConnection.InTransaction then
+        dados.ADOConnection.RollbackTrans;
+      dados.ADOConnection.BeginTrans();
+    end;
+    if (cdsCadastro.state in [dsInsert,dsEdit]) then
+      cdsCadastro.Post();
+    if cdsCadastro.ChangeCount > 0 then
+    begin
+      cdsCadastro.ApplyUpdates(0);
+    end;
+    Application.MessageBox(Pchar('Salvo com sucesso.'),
+                                 'SYSGER',MB_ICONEXCLAMATION);
+    if UsarTransacao then
+      dados.ADOConnection.CommitTrans();
+    pgControl.ActivePage := tabConsulta;
+    tabCadastro.TabVisible := false;
+    CarregaListagem(True);                               
+  except
+    on E: exception do
+    begin
+      if UsarTransacao then
+        if dados.ADOConnection.InTransaction then
+          dados.ADOConnection.RollbackTrans;
+      Application.MessageBox(PChar('Ocorreu um erro:' + #13#10 + E.Message), 'SYSGER', MB_ICONWARNING);
+
+    end;
+  end
+end;
+
+procedure TfrmCadastroTemplate.tabConsultaShow(Sender: TObject);
+begin
+  tabCadastro.TabVisible := false;
+end;
+
+procedure TfrmCadastroTemplate.edtPesquisaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if Key=#13 then
+    btnBuscar.Click();
+end;
+
+function TfrmCadastroTemplate.permiteGravar: Boolean;
+begin
+  raise exception.create('Faça Override  da funcao permiteGravar!');
+end;
+
+procedure TfrmCadastroTemplate.cxGrid1DBTableView1DblClick(
+  Sender: TObject);
+begin
+  btnEditar.Click();
+end;
+
+function TfrmCadastroTemplate.permiteExcluir: Boolean;
+begin
+  raise exception.create('Faça Override  da funcao permiteExcluir!');
+end;
+
+
+procedure TfrmCadastroTemplate.cdsCadastroReconcileError(
+  DataSet: TClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
+  var Action: TReconcileAction);
+begin
+  raise exception.create(E.Message);
+end;
+
+procedure TfrmCadastroTemplate.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action := caFree;
+  frmCadastroTemplate := nil;
+//  if Assigned(FExternalFormVariable) then
+//    FExternalFormVariable := nil;
+end;
+
+end.

@@ -1,0 +1,26 @@
+inherited frmConfiguracoesSistema: TfrmConfiguracoesSistema
+  Caption = 'Configura'#231#245'es Sistema'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnl1: TPanel
+    object lbl1: TLabel
+      Left = 8
+      Top = 24
+      Width = 149
+      Height = 13
+      Caption = 'Path Tabela Modelo Refer'#234'ncia'
+    end
+    object edtPathTabelaModeloReferencia: TEdit
+      Left = 6
+      Top = 41
+      Width = 403
+      Height = 21
+      TabOrder = 0
+    end
+  end
+  inherited pnl2: TPanel
+    inherited btn1: TBitBtn
+      OnClick = nil
+    end
+  end
+end

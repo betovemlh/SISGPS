@@ -1,0 +1,49 @@
+unit ConfiguracoesSistema;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, TemplateCadastroArquivoIni, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TfrmConfiguracoesSistema = class(TTemplateCadastroIni)
+    lbl3: TLabel;
+    edtPathBaseDadosXML: TEdit;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function permiteGravar():Boolean;override;
+  end;
+
+var
+  frmConfiguracoesSistema: TfrmConfiguracoesSistema;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmConfiguracoesSistema.FormCreate(Sender: TObject);
+begin
+  CaminhoArquivoIni := ExtractFilePath(Application.ExeName)+'\config.ini';
+  inherited;
+end;
+
+function TfrmConfiguracoesSistema.permiteGravar: Boolean;
+begin
+  if edtPathBaseDadosXML.Text=EmptyStr then
+    Application.MessageBox(Pchar('Digite um caminho para o repositório da base de dados XML.'),
+                          Pchar(application.Title),MB_ICONERROR)
+  else if copy(edtPathBaseDadosXML.Text,length(edtPathBaseDadosXML.text),length(edtPathBaseDadosXML.text))<>'\' then
+    Application.MessageBox(Pchar('Formato de Path inválido.Coloque no final do caminho o caractere '+QuotedStr('\')),
+                          Pchar(application.Title),MB_ICONERROR)
+  else if not DirectoryExists(edtPathBaseDadosXML.Text) then
+    Application.MessageBox(Pchar('Path não encontrado.'),
+                                Pchar(application.Title),MB_ICONERROR)
+  else
+    Result := true;
+end;
+
+end.

@@ -1,0 +1,119 @@
+inherited frmCadastroAreaProcesso: TfrmCadastroAreaProcesso
+  Caption = 'Cadastro de Area de Processo'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnl2: TPanel
+    inherited pgControl: TPageControl
+      inherited tabConsulta: TTabSheet
+        inherited dbgrd1: TDBGrid
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'Id'
+              Width = 30
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Nome'
+              Width = 250
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DataCriacao'
+              Title.Caption = 'Data Cria'#231#227'o'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Objetivo'
+              Visible = True
+            end>
+        end
+      end
+      inherited tabCadastro: TTabSheet
+        object lbl4: TLabel [0]
+          Left = 3
+          Top = 128
+          Width = 88
+          Height = 13
+          Caption = 'InformacoesGerais'
+        end
+        object lbl3: TLabel [1]
+          Left = 3
+          Top = 88
+          Width = 59
+          Height = 13
+          Caption = 'DataCriacao'
+        end
+        object lbl2: TLabel [2]
+          Left = 3
+          Top = 48
+          Width = 28
+          Height = 13
+          Caption = 'Nome'
+        end
+        object lbl1: TLabel [3]
+          Left = 3
+          Top = 8
+          Width = 9
+          Height = 13
+          Caption = 'Id'
+        end
+        object dbmmoInformacoesGerais: TDBMemo
+          Left = 3
+          Top = 147
+          Width = 658
+          Height = 271
+          DataField = 'InformacoesGerais'
+          DataSource = dsCadastro
+          TabOrder = 1
+        end
+        object dbedtDataCriacao: TDBEdit
+          Left = 3
+          Top = 104
+          Width = 88
+          Height = 21
+          DataField = 'DataCriacao'
+          TabOrder = 2
+        end
+        object dbedtNome: TDBEdit
+          Left = 3
+          Top = 61
+          Width = 305
+          Height = 21
+          DataField = 'Nome'
+          TabOrder = 3
+        end
+        object dbedtId: TDBEdit
+          Left = 3
+          Top = 21
+          Width = 53
+          Height = 21
+          Color = clInactiveCaption
+          DataField = 'Id'
+          ReadOnly = True
+          TabOrder = 4
+        end
+      end
+    end
+  end
+  inherited cdsCadastro: TClientDataSet
+    object cdsCadastroId: TIntegerField
+      FieldName = 'Id'
+    end
+    object cdsCadastroNome: TStringField
+      FieldName = 'Nome'
+      Size = 100
+    end
+    object cdsCadastroDataCriacao: TDateTimeField
+      FieldName = 'DataCriacao'
+      EditMask = '!99/99/0000;1;_'
+    end
+    object cdsCadastroObjetivo: TMemoField
+      FieldName = 'Objetivo'
+      BlobType = ftMemo
+    end
+  end
+end

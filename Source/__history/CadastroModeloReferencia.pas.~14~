@@ -1,0 +1,52 @@
+unit CadastroModeloReferencia;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, TemplateCadastro, DB, Provider, DBClient, ADODB, StdCtrls, Buttons,
+  Grids, DBGrids, ComCtrls, ExtCtrls,  DBCtrls,
+   Mask;
+
+type
+  TfrmCadastroModeloReferencia = class(TfrmCadastroTemplate)
+    cdsCadastroId: TIntegerField;
+    cdsCadastroNome: TStringField;
+    cdsCadastroDataCriacao: TDateTimeField;
+    cdsCadastroInformacoesGerais: TBlobField;
+    lbl1: TLabel;
+    dbedt1: TDBEdit;
+    lbl2: TLabel;
+    dbedtId: TDBEdit;
+    lbl3: TLabel;
+    lbl4: TLabel;
+    dbmmo1: TDBMemo;
+    dbedt2: TDBEdit;
+    procedure FormCreate(Sender: TObject);
+    procedure cdsCadastroNewRecord(DataSet: TDataSet);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastroModeloReferencia: TfrmCadastroModeloReferencia;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmCadastroModeloReferencia.cdsCadastroNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+  Dataset.FieldByName('id').AsInteger := cdsCadastro.RecordCount+1;
+end;
+
+procedure TfrmCadastroModeloReferencia.FormCreate(Sender: TObject);
+begin
+  CaminhoTabelaXML := ExtractFilePath(Application.ExeName)+'\dados\ModeloReferencia.xml';
+  inherited;
+end;
+
+end.

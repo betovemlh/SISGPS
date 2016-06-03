@@ -1,0 +1,17 @@
+program SYSGPS;
+
+uses
+  Forms,
+  TemplateCadastro in 'Template\TemplateCadastro.pas' {frmCadastroTemplate},
+  CadastroModeloReferencia in 'Source\CadastroModeloReferencia.pas' {frmCadastroModeloReferencia},
+  Midas,
+  TelaPrincipal in 'Source\TelaPrincipal.pas' {frmTelaPrincipal};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmTelaPrincipal, frmTelaPrincipal);
+  Application.Run;
+end.

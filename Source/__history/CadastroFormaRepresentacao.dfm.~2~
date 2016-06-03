@@ -1,0 +1,15 @@
+inherited frmCadastroTemplate1: TfrmCadastroTemplate1
+  Caption = 'Cadastro Forma de Representa'#231#227'o'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnl2: TPanel
+    inherited pgControl: TPageControl
+      inherited tabCadastro: TTabSheet
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
+      end
+    end
+  end
+end

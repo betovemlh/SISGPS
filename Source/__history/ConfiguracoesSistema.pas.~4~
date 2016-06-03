@@ -1,0 +1,31 @@
+unit ConfiguracoesSistema;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, TemplateCadastroArquivoIni, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TfrmConfiguracoesSistema = class(TTemplateCadastroIni)
+    edtPathTabelaModeloReferencia: TEdit;
+    lbl1: TLabel;
+    lbl2: TLabel;
+    edtPathTabelaAreaProcesso: TEdit;
+    lbl3: TLabel;
+    edtPathTabelaFormaRepresentacao: TEdit;
+    lbl4: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmConfiguracoesSistema: TfrmConfiguracoesSistema;
+
+implementation
+
+{$R *.dfm}
+
+end.

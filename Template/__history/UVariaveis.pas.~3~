@@ -1,0 +1,7 @@
+unit UVariaveis;
+
+interface
+ var  PathBaseDadosXML:String;
+implementation
+
+end.
