@@ -18,6 +18,7 @@ type
     btn3: TBitBtn;
     btn4: TBitBtn;
     btn5: TBitBtn;
+    btn6: TBitBtn;
     procedure tmr1Timer(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
@@ -25,6 +26,7 @@ type
     procedure btn4Click(Sender: TObject);
     procedure btn5Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btn6Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,7 +39,7 @@ var
 implementation
 
 uses CadastroModeloReferencia, CadastroAreaProcesso, CadastroFormaRepresentacao,
-  ConfiguracoesSistema,UVariaveis;
+  ConfiguracoesSistema,UVariaveis, CadastroMetaGenerica;
 
 {$R *.dfm}
 
@@ -83,6 +85,16 @@ begin
     frmCOnfiguracoesSistema.ShowModal();
   Finally
     frmCOnfiguracoesSistema.Free;
+  End;
+end;
+
+procedure TfrmTelaPrincipal.btn6Click(Sender: TObject);
+begin
+  Try
+    Application.CreateForm(TfrmCadastroMetaGenerica,frmCadastroMetaGenerica);
+    frmCadastroMetaGenerica.ShowModal();
+  Finally
+    frmCadastroMetaGenerica.Free;
   End;
 end;
 

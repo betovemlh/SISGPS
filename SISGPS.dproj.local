@@ -16,5 +16,7 @@
     <Transaction>2016/05/31 14:20:23.475.dfm,C:\Users\e173469\Desktop\SYSGPS\Unit1.dfm=C:\Users\e173469\Desktop\SYSGPS\Source\ConfiguracoesSistema.dfm</Transaction>
     <Transaction>2016/05/31 14:33:55.329.pas,C:\Users\e173469\Desktop\SYSGPS\Unit1.pas=C:\Users\e173469\Desktop\SYSGPS\Template\UVariaveis.pas</Transaction>
     <Transaction>2016/05/31 15:43:55.595.dproj,C:\Users\e173469\Desktop\SYSGPS\SYSGPS.dproj=C:\Users\e173469\Desktop\SYSGPS\SISGPS.dproj</Transaction>
+    <Transaction>2016/06/05 10:07:12.871.pas,C:\Users\e173469\Documents\SISGPS\Unit1.pas=C:\Users\e173469\Documents\SISGPS\Source\CadastroMetaGenerica.pas</Transaction>
+    <Transaction>2016/06/05 10:07:12.871.dfm,C:\Users\e173469\Documents\SISGPS\Unit1.dfm=C:\Users\e173469\Documents\SISGPS\Source\CadastroMetaGenerica.dfm</Transaction>
   </Transactions>
 </BorlandProject>

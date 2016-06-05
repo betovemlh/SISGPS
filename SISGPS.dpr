@@ -10,7 +10,8 @@ uses
   CadastroFormaRepresentacao in 'Source\CadastroFormaRepresentacao.pas' {frmCadastroFormaRepresentacao},
   TemplateCadastroArquivoIni in 'Template\TemplateCadastroArquivoIni.pas' {TemplateCadastroIni},
   ConfiguracoesSistema in 'Source\ConfiguracoesSistema.pas' {frmConfiguracoesSistema},
-  UVariaveis in 'Template\UVariaveis.pas';
+  UVariaveis in 'Template\UVariaveis.pas',
+  CadastroMetaGenerica in 'Source\CadastroMetaGenerica.pas' {frmCadastroMetaGenerica};
 
 {$R *.res}
 

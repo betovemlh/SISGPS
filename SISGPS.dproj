@@ -60,6 +60,9 @@
 				<Form>frmConfiguracoesSistema</Form>
 			</DCCReference>
 			<DCCReference Include="Template\UVariaveis.pas"/>
+			<DCCReference Include="Source\CadastroMetaGenerica.pas">
+				<Form>frmCadastroMetaGenerica</Form>
+			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
