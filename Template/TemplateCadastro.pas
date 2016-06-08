@@ -51,13 +51,13 @@ type
     FLimiteRegistrosListagem:Integer;
     FUsarTransacao:Boolean;
 
-    procedure CarregaListagem(bWhere:Boolean);
     procedure   Novo();
     procedure   Editar();
     procedure Cancelar();
     procedure  Gravar();
     function   getLastId():integer;
   public
+    procedure CarregaListagem(bWhere:Boolean);
     property TabelaXML:String read FTabelaXML write FTabelaXML ;
     property NomeCabecalhoExcel:String read FNomeCabecalhoExcel write FNomeCabecalhoExcel ;
     property CampoPrimario:String read FCampoPrimario write FCampoPrimario;
@@ -117,6 +117,10 @@ begin
           Application.MessageBox(PChar('Ocorreu um erro:' + #13#10 + E.Message), 'SYSGER', MB_ICONWARNING);
         end;
       end
+    end
+    else
+    begin
+      raise exception.Create('exclusão cancelada.');
     end;
 end;
 

@@ -1,11 +1,16 @@
 inherited frmCadastroNivelCapacidade: TfrmCadastroNivelCapacidade
   Caption = 'Cadastro de Niveis de Capacidade'
+  ExplicitWidth = 680
+  ExplicitHeight = 518
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnl2: TPanel
     inherited pgControl: TPageControl
-      ActivePage = tabCadastro
       inherited tabConsulta: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 664
+        ExplicitHeight = 460
         inherited dbgrd1: TDBGrid
           Columns = <
             item
@@ -31,10 +36,18 @@ inherited frmCadastroNivelCapacidade: TfrmCadastroNivelCapacidade
           inherited btnEditar: TBitBtn
             OnClick = btnEditarClick
           end
+          inherited btnExcluir: TBitBtn
+            Top = 66
+            ExplicitTop = 66
+          end
         end
       end
       inherited tabCadastro: TTabSheet
         OnShow = tabCadastroShow
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 664
+        ExplicitHeight = 460
         object lbl1: TLabel [0]
           Left = 3
           Top = 8

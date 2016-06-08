@@ -52,14 +52,16 @@ type
     procedure tabCadastroShow(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnAddMetaClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
   private
     { Private declarations }
     function permiteGravar():Boolean;override;
     function permiteExcluir():Boolean;override;
     procedure LoadMetasGenericasDisponiveis();
-    procedure LoadMetasGenericasSelecionadas();
+    procedure LoadMetasGenericasSelecionadas(IdNivelCapacidade:Integer);
     procedure LoadMetasCadastradas();
     procedure   GravarLigacaoMetasGenericasXNiveisCapacidade();
+    procedure ExcluiLigacaoMetasGenericasNiveisCapacidade(IdNivelCapacidade:integer);
   public
     { Public declarations }
   end;
@@ -105,6 +107,18 @@ begin
   end;
 end;
 
+procedure TfrmCadastroNivelCapacidade.btnExcluirClick(Sender: TObject);
+var CodigoRemovido:integer;
+begin
+  Try
+    CodigoRemovido := cdsCadastroId.AsInteger;
+    inherited;
+    ExcluiLigacaoMetasGenericasNiveisCapacidade(CodigoRemovido);
+  Except
+     inherited  CarregaListagem(false);
+  end;
+end;
+
 procedure TfrmCadastroNivelCapacidade.btnGravarClick(Sender: TObject);
 begin
   GravarLigacaoMetasGenericasXNiveisCapacidade();
@@ -124,13 +138,24 @@ begin
   Dataset.FieldByName(CampoPrimario).AsInteger := getLastId(cdsMetasGenericasXNiveisCapacidadeSelecionadas,CampoPrimario)+1;
 end;
 
+procedure TfrmCadastroNivelCapacidade.ExcluiLigacaoMetasGenericasNiveisCapacidade(IdNivelCapacidade:integer);
+begin
+  LoadMetasGenericasSelecionadas(IdNivelCapacidade);
+  cdsMetasGenericasXNiveisCapacidadeSelecionadas.First();
+  while not cdsMetasGenericasXNiveisCapacidadeSelecionadas.eof do
+  begin
+    cdsMetasGenericasXNiveisCapacidadeSelecionadas.Delete();
+  end;
+  GravarLigacaoMetasGenericasXNiveisCapacidade();
+end;
+
 procedure TfrmCadastroNivelCapacidade.FormCreate(Sender: TObject);
 begin
   CampoPrimario := 'id';
   TabelaXML := XMLNivelCapacidade;
   inherited;
   LoadMetasCadastradas();
-  LoadMetasGenericasSelecionadas();
+  LoadMetasGenericasSelecionadas(0);
   LoadMetasGenericasDisponiveis();
 end;
 
@@ -172,7 +197,7 @@ end;
 procedure TfrmCadastroNivelCapacidade.tabCadastroShow(Sender: TObject);
 begin
   inherited;
-  LoadMetasGenericasSelecionadas();
+  LoadMetasGenericasSelecionadas(cdsCadastroId.AsInteger);
   LoadMetasGenericasDisponiveis();
 end;
 
@@ -204,7 +229,7 @@ begin
 end;
 
 
-procedure TfrmCadastroNivelCapacidade.LoadMetasGenericasSelecionadas();
+procedure TfrmCadastroNivelCapacidade.LoadMetasGenericasSelecionadas(IdNivelCapacidade:Integer);
 begin
   Try
     cdsMetasGenericasXNiveisCapacidadeSelecionadas.Filtered := false;
@@ -214,10 +239,10 @@ begin
     else
       cdsMetasGenericasXNiveisCapacidadeSelecionadas.CreateDataSet();
     cdsMetasGenericasXNiveisCapacidadeSelecionadas.Open();
-    if cdsCadastroId.AsString<>EmptyStr then
+    if IdNivelCapacidade<>0 then
     begin
       cdsMetasGenericasXNiveisCapacidadeSelecionadas.Filtered := false;
-      cdsMetasGenericasXNiveisCapacidadeSelecionadas.Filter := 'FK_IDNIVELCAPACIDADE='+cdsCadastroId.AsString;
+      cdsMetasGenericasXNiveisCapacidadeSelecionadas.Filter := 'FK_IDNIVELCAPACIDADE='+IntToStr(IdNivelCapacidade);
       cdsMetasGenericasXNiveisCapacidadeSelecionadas.Filtered := True;
     end;
   Except
