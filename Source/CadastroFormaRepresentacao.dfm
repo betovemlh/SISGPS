@@ -1,16 +1,10 @@
 inherited frmCadastroFormaRepresentacao: TfrmCadastroFormaRepresentacao
   Caption = 'Cadastro Forma de Representa'#231#227'o'
-  ExplicitWidth = 320
-  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnl2: TPanel
     inherited pgControl: TPageControl
       inherited tabConsulta: TTabSheet
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         inherited dbgrd1: TDBGrid
           Columns = <
             item
@@ -33,10 +27,6 @@ inherited frmCadastroFormaRepresentacao: TfrmCadastroFormaRepresentacao
         end
       end
       inherited tabCadastro: TTabSheet
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object lbl2: TLabel [0]
           Left = 3
           Top = 48

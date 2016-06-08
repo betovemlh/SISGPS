@@ -30,7 +30,7 @@ object frmCadastroTemplate: TfrmCadastroTemplate
       Top = 1
       Width = 672
       Height = 488
-      ActivePage = tabCadastro
+      ActivePage = tabConsulta
       Align = alClient
       TabOrder = 0
       OnChange = pgControlChange

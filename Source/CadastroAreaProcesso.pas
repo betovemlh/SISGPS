@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, TemplateCadastro, DB, DBClient, StdCtrls, Buttons, Grids, DBGrids,
-  ComCtrls, ExtCtrls, Mask, DBCtrls;
+  ComCtrls, ExtCtrls, Mask, DBCtrls,UVariaveis;
 
 type
   TfrmCadastroAreaProcesso = class(TfrmCadastroTemplate)
@@ -47,7 +47,7 @@ end;
 procedure TfrmCadastroAreaProcesso.FormCreate(Sender: TObject);
 begin
   CampoPrimario := 'id';
-  TabelaXML := 'AreaProcesso.xml';
+  TabelaXML := XMLAreaProcesso;
   inherited;
 end;
 

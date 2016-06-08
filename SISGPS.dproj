@@ -63,6 +63,12 @@
 			<DCCReference Include="Source\CadastroMetaGenerica.pas">
 				<Form>frmCadastroMetaGenerica</Form>
 			</DCCReference>
+			<DCCReference Include="Source\CadastroMetasEPraticasEspecificas.pas">
+				<Form>frmCadastroMetasEPraticasEspecificas</Form>
+			</DCCReference>
+			<DCCReference Include="Source\CadastroNivelCapacidade.pas">
+				<Form>frmCadastroNivelCapacidade</Form>
+			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

@@ -6,6 +6,7 @@ inherited frmCadastroAreaProcesso: TfrmCadastroAreaProcesso
   TextHeight = 13
   inherited pnl2: TPanel
     inherited pgControl: TPageControl
+      ActivePage = tabConsulta
       inherited tabConsulta: TTabSheet
         ExplicitLeft = 4
         ExplicitTop = 24

@@ -1,12 +1,28 @@
 unit UVariaveis;
 
 interface
- var  PathBaseDadosXML:String;
+uses IniFiles,Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, TemplateCadastroArquivoIni, StdCtrls, Buttons, ExtCtrls,DBClient, Db;
+
+
+ function getLastId(cds:TClientDataSet;CampoPrimario:String): integer;
  procedure LoadVariables();
+
+
+const
+  XMLAreaProcesso: String = 'AreaProcesso.xml';
+  XMLFormaRepresentacao: String = 'FormaRepresentacao.xml';
+  XMLMetaGenerica: String = 'MetaGenerica.xml';
+  XMLModeloReferencia:String='ModeloReferencia.xml';
+  XMLNivelCapacidade:String='NivelCapacidade.xml';
+  XMLNivelCapacidadeXMetasGenericas:String= 'NivelCapacidadeXMetasGenericas.xml';
+ var  PathBaseDadosXML:String;
+
+
+
 implementation
 
-uses IniFiles,Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, TemplateCadastroArquivoIni, StdCtrls, Buttons, ExtCtrls;
+
 
 procedure LoadVariables();
 var config: TIniFile;
@@ -18,5 +34,22 @@ begin
   Finally
     config.Free;
   End;
+end;
+
+function getLastId(cds:TClientDataSet;CampoPrimario:String): integer;
+var cdsTemp:TClientDataSet;
+begin
+  if cds.IsEmpty then
+    Result :=1
+  else begin
+    Try
+      cdsTemp := TClientDataSet.Create(nil);
+      cdsTemp.CloneCursor(cds,false,false);
+      cdsTemp.Last();
+      Result := cdsTemp.FieldByName(CampoPrimario).AsInteger
+    Finally
+      cdsTemp.Free();
+    End;
+  end;
 end;
 end.

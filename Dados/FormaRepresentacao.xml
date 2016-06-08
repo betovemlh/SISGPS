@@ -1,0 +1,1 @@
+<?xml version="1.0" standalone="yes"?>  <DATAPACKET Version="2.0"><METADATA><FIELDS><FIELD attrname="Id" fieldtype="i4"/><FIELD attrname="Nome" fieldtype="string" WIDTH="100"/><FIELD attrname="DataCriacao" fieldtype="dateTime"/></FIELDS><PARAMS/></METADATA><ROWDATA><ROW Id="1" Nome="addasdasda" DataCriacao="20160606T11:07:15597"/></ROWDATA></DATAPACKET>

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, TemplateCadastro, DB, DBClient, StdCtrls, Buttons, Grids, DBGrids,
-  ComCtrls, ExtCtrls, DBCtrls, Mask;
+  ComCtrls, ExtCtrls, DBCtrls, Mask,UVariaveis;
 
 type
   TfrmCadastroMetaGenerica = class(TfrmCadastroTemplate)
@@ -50,7 +50,7 @@ end;
 procedure TfrmCadastroMetaGenerica.FormCreate(Sender: TObject);
 begin
   CampoPrimario := 'id';
-  TabelaXML := 'MetaGenerica.xml';
+  TabelaXML := XMLMetaGenerica;
   inherited;
 end;
 

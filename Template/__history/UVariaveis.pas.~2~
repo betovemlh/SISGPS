@@ -1,7 +1,0 @@
-unit UVariaveis;
-
-interface
-  PathBaseDadosXML:String;
-implementation
-
-end.

@@ -179,10 +179,10 @@ end;
 
 procedure TfrmCadastroTemplate.Novo;
 begin
+  cdsCadastro.Append();
   tabCadastro.TabVisible := true;
   pgControl.ActivePage := tabCadastro;
   pgControl.Repaint();
-  cdsCadastro.Append();
 end;
 
 

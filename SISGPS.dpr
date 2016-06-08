@@ -11,7 +11,9 @@ uses
   TemplateCadastroArquivoIni in 'Template\TemplateCadastroArquivoIni.pas' {TemplateCadastroIni},
   ConfiguracoesSistema in 'Source\ConfiguracoesSistema.pas' {frmConfiguracoesSistema},
   UVariaveis in 'Template\UVariaveis.pas',
-  CadastroMetaGenerica in 'Source\CadastroMetaGenerica.pas' {frmCadastroMetaGenerica};
+  CadastroMetaGenerica in 'Source\CadastroMetaGenerica.pas' {frmCadastroMetaGenerica},
+  CadastroMetasEPraticasEspecificas in 'Source\CadastroMetasEPraticasEspecificas.pas' {frmCadastroMetasEPraticasEspecificas},
+  CadastroNivelCapacidade in 'Source\CadastroNivelCapacidade.pas' {frmCadastroNivelCapacidade};
 
 {$R *.res}
 

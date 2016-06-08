@@ -19,6 +19,8 @@ type
     btn4: TBitBtn;
     btn5: TBitBtn;
     btn6: TBitBtn;
+    btn7: TBitBtn;
+    btn8: TBitBtn;
     procedure tmr1Timer(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
@@ -27,6 +29,8 @@ type
     procedure btn5Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btn6Click(Sender: TObject);
+    procedure btn7Click(Sender: TObject);
+    procedure btn8Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,7 +43,8 @@ var
 implementation
 
 uses CadastroModeloReferencia, CadastroAreaProcesso, CadastroFormaRepresentacao,
-  ConfiguracoesSistema,UVariaveis, CadastroMetaGenerica;
+  ConfiguracoesSistema,UVariaveis, CadastroMetaGenerica,
+  CadastroMetasEPraticasEspecificas, CadastroNivelCapacidade;
 
 {$R *.dfm}
 
@@ -95,6 +100,26 @@ begin
     frmCadastroMetaGenerica.ShowModal();
   Finally
     frmCadastroMetaGenerica.Free;
+  End;
+end;
+
+procedure TfrmTelaPrincipal.btn7Click(Sender: TObject);
+begin
+  Try
+    Application.CreateForm(TfrmCadastroMetasEPraticasEspecificas,frmCadastroMetasEPraticasEspecificas);
+    frmCadastroMetasEPraticasEspecificas.ShowModal();
+  Finally
+    frmCadastroMetasEPraticasEspecificas.Free;
+  End;
+end;
+
+procedure TfrmTelaPrincipal.btn8Click(Sender: TObject);
+begin
+  Try
+    Application.CreateForm(TfrmCadastroNivelCapacidade,frmCadastroNivelCapacidade);
+    frmCadastroNivelCapacidade.ShowModal();
+  Finally
+    frmCadastroNivelCapacidade.Free;
   End;
 end;
 
