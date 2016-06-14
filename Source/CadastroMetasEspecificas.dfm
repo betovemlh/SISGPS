@@ -1,5 +1,5 @@
-inherited frmCadastroMetasEPraticasEspecificas: TfrmCadastroMetasEPraticasEspecificas
-  Caption = 'Cadastro de Metas e Praticas Especificas'
+inherited frmCadastroMetasEspecificas: TfrmCadastroMetasEspecificas
+  Caption = 'Cadastro de Metas Especificas'
   ClientWidth = 799
   ExplicitWidth = 805
   ExplicitHeight = 518

@@ -1,57 +1,31 @@
-inherited frmCadastroNivelCapacidade: TfrmCadastroNivelCapacidade
-  Caption = 'Cadastro de Niveis de Capacidade'
-  ClientHeight = 520
+inherited frmCadastroNivelMaturidade: TfrmCadastroNivelMaturidade
+  Caption = 'Cadastro de Nivel de Maturidade'
+  ClientHeight = 537
   ExplicitWidth = 680
-  ExplicitHeight = 548
+  ExplicitHeight = 565
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnl2: TPanel
-    Height = 520
-    ExplicitHeight = 520
+    Height = 537
+    ExplicitHeight = 537
     inherited pgControl: TPageControl
-      Height = 518
+      Height = 535
       ActivePage = tabCadastro
-      ExplicitHeight = 518
+      ExplicitHeight = 535
       inherited tabConsulta: TTabSheet
         ExplicitLeft = 4
         ExplicitTop = 24
         ExplicitWidth = 664
-        ExplicitHeight = 490
+        ExplicitHeight = 507
         inherited dbgrd1: TDBGrid
-          Height = 490
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'Id'
-              Width = 30
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'Nome'
-              Width = 300
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DataCriacao'
-              Title.Caption = 'Data de Cria'#231#227'o'
-              Visible = True
-            end>
+          Height = 507
         end
         inherited pnl1: TPanel
-          Height = 490
-          ExplicitHeight = 490
-          inherited btnEditar: TBitBtn
-            OnClick = btnEditarClick
-          end
-          inherited btnExcluir: TBitBtn
-            Top = 66
-            ExplicitTop = 66
-          end
+          Height = 507
+          ExplicitHeight = 507
           inherited btn1: TBitBtn
-            Top = 456
-            ExplicitTop = 456
+            Top = 471
+            ExplicitTop = 471
           end
         end
       end
@@ -60,13 +34,13 @@ inherited frmCadastroNivelCapacidade: TfrmCadastroNivelCapacidade
         ExplicitLeft = 4
         ExplicitTop = 24
         ExplicitWidth = 664
-        ExplicitHeight = 490
-        object lbl1: TLabel [0]
+        ExplicitHeight = 507
+        object lbl6: TLabel [0]
           Left = 3
-          Top = 8
-          Width = 9
+          Top = 52
+          Width = 28
           Height = 13
-          Caption = 'Id'
+          Caption = 'Nome'
         end
         object lbl5: TLabel [1]
           Left = 75
@@ -75,54 +49,52 @@ inherited frmCadastroNivelCapacidade: TfrmCadastroNivelCapacidade
           Height = 13
           Caption = 'Data de Cria'#231#227'o'
         end
-        object lbl2: TLabel [2]
+        object lbl1: TLabel [2]
           Left = 3
-          Top = 48
-          Width = 28
+          Top = 8
+          Width = 9
           Height = 13
-          Caption = 'Nome'
+          Caption = 'Id'
         end
-        object shp1: TShape [3]
-          Left = 6
+        object lbl7: TLabel [3]
+          Left = 3
+          Top = 94
+          Width = 120
+          Height = 13
+          Caption = 'Forma de Representa'#231#227'o'
+        end
+        object lbl2: TLabel [4]
+          Left = 3
           Top = 132
-          Width = 635
-          Height = 1
-        end
-        object lbl3: TLabel [4]
-          Left = 6
-          Top = 139
-          Width = 139
+          Width = 48
           Height = 13
-          Caption = 'Metas Gen'#233'ricas Dispon'#237'veis'
+          Caption = 'Descri'#231#227'o'
         end
         object lbl4: TLabel [5]
-          Left = 379
-          Top = 139
-          Width = 147
+          Left = 374
+          Top = 291
+          Width = 156
           Height = 13
-          Caption = 'Metas Gen'#233'ricas Selecionadas'
+          Caption = 'Areas de Processo Selecionadas'
         end
-        object lbl6: TLabel [6]
-          Left = 4
-          Top = 86
-          Width = 105
+        object lbl3: TLabel [6]
+          Left = 3
+          Top = 291
+          Width = 148
           Height = 13
-          Caption = 'Modelo de Refer'#234'ncia'
+          Caption = 'Areas de Processo Dispon'#237'veis'
         end
         inherited pnl3: TPanel
-          Top = 450
-          ExplicitTop = 450
+          Top = 467
+          ExplicitTop = 467
         end
-        object dbedtId: TDBEdit
+        object dbedtSigla: TDBEdit
           Left = 3
-          Top = 21
-          Width = 53
+          Top = 68
+          Width = 449
           Height = 21
-          TabStop = False
-          Color = clInactiveCaption
-          DataField = 'Id'
+          DataField = 'Nome'
           DataSource = dsCadastro
-          ReadOnly = True
           TabOrder = 1
         end
         object dbedtDataCriacao1: TDBEdit
@@ -137,18 +109,85 @@ inherited frmCadastroNivelCapacidade: TfrmCadastroNivelCapacidade
           ReadOnly = True
           TabOrder = 2
         end
-        object dbedtNome: TDBEdit
+        object dbedtId: TDBEdit
           Left = 3
-          Top = 61
-          Width = 430
+          Top = 21
+          Width = 53
           Height = 21
-          DataField = 'Nome'
+          TabStop = False
+          Color = clInactiveCaption
+          DataField = 'Id'
           DataSource = dsCadastro
+          ReadOnly = True
           TabOrder = 3
         end
+        object dblkcbbFK_IDModeloReferencia: TDBLookupComboBox
+          Left = 3
+          Top = 108
+          Width = 286
+          Height = 21
+          DataField = 'FK_IdFormaRepresentacao'
+          DataSource = dsCadastro
+          KeyField = 'Id'
+          ListField = 'Nome'
+          ListSource = dsFormaRepresentacao
+          TabOrder = 4
+        end
+        object dbmmo1: TDBMemo
+          Left = 3
+          Top = 148
+          Width = 658
+          Height = 133
+          DataField = 'Descricao'
+          DataSource = dsCadastro
+          TabOrder = 5
+        end
+        object dbgrd2: TDBGrid
+          Left = 3
+          Top = 310
+          Width = 262
+          Height = 158
+          DataSource = dsAreasProcessoDisponiveis
+          Options = [dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 6
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'Nome'
+              Width = 200
+              Visible = True
+            end>
+        end
+        object dbgrd3: TDBGrid
+          Left = 371
+          Top = 310
+          Width = 261
+          Height = 158
+          DataSource = dsNivelMaturidadeXAreasProcessoSelecionada
+          Options = [dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 7
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DescricaoAreaProcesso'
+              Title.Caption = 'Nome'
+              Width = 200
+              Visible = True
+            end>
+        end
         object btnAddMeta: TBitBtn
-          Left = 279
-          Top = 264
+          Left = 271
+          Top = 328
           Width = 75
           Height = 33
           Caption = 'Add'
@@ -229,12 +268,12 @@ inherited frmCadastroNivelCapacidade: TfrmCadastroNivelCapacidade
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000}
           ParentDoubleBuffered = False
-          TabOrder = 4
+          TabOrder = 8
           OnClick = btnAddMetaClick
         end
         object btn3: TBitBtn
-          Left = 279
-          Top = 320
+          Left = 271
+          Top = 384
           Width = 75
           Height = 32
           Caption = 'Del'
@@ -315,63 +354,8 @@ inherited frmCadastroNivelCapacidade: TfrmCadastroNivelCapacidade
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000}
           ParentDoubleBuffered = False
-          TabOrder = 5
+          TabOrder = 9
           OnClick = btn3Click
-        end
-        object dbgrd2: TDBGrid
-          Left = 3
-          Top = 158
-          Width = 262
-          Height = 288
-          DataSource = dsMetasGenericasDisponiveis
-          Options = [dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 6
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'Nome'
-              Width = 200
-              Visible = True
-            end>
-        end
-        object dbgrd3: TDBGrid
-          Left = 379
-          Top = 158
-          Width = 262
-          Height = 288
-          DataSource = dsMetasGenericasXNiveisCapacidadeSelecionadas
-          Options = [dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 7
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'NomeMetaGenerica'
-              Title.Caption = 'Nome'
-              Width = 200
-              Visible = True
-            end>
-        end
-        object dblkcbbFK_IdAreaProcesso: TDBLookupComboBox
-          Left = 3
-          Top = 100
-          Width = 286
-          Height = 21
-          DataField = 'FK_IDModeloReferencia'
-          DataSource = dsCadastro
-          KeyField = 'Id'
-          ListField = 'Nome'
-          ListSource = dsModeloReferencia
-          TabOrder = 8
         end
       end
     end
@@ -383,162 +367,51 @@ inherited frmCadastroNivelCapacidade: TfrmCadastroNivelCapacidade
         DataType = ftInteger
       end
       item
-        Name = 'DataCriacao'
-        DataType = ftDateTime
-      end
-      item
         Name = 'Nome'
         DataType = ftString
         Size = 100
       end
       item
-        Name = 'FK_IDModeloReferencia'
-        DataType = ftInteger
+        Name = 'DataCriacao'
+        DataType = ftDateTime
       end
       item
-        Name = 'FK_IdFormaRepresentacao'
+        Name = 'Descricao'
+        DataType = ftMemo
+      end
+      item
+        Name = 'FK_IDFormaRepresentacao'
         DataType = ftInteger
       end>
     StoreDefs = True
     object cdsCadastroId: TIntegerField
       FieldName = 'Id'
     end
-    object cdsCadastroDataCriacao: TDateTimeField
-      FieldName = 'DataCriacao'
-    end
     object cdsCadastroNome: TStringField
       FieldName = 'Nome'
       Size = 100
     end
-    object cdsCadastroFK_IDModeloReferencia: TIntegerField
-      FieldName = 'FK_IDModeloReferencia'
+    object cdsCadastroDataCriacao: TDateTimeField
+      FieldName = 'DataCriacao'
     end
-  end
-  object cdsMetasGenericasXNiveisCapacidadeSelecionadas: TClientDataSet
-    Active = True
-    Aggregates = <>
-    Params = <>
-    OnNewRecord = cdsMetasGenericasXNiveisCapacidadeSelecionadasNewRecord
-    Left = 544
-    Top = 104
-    Data = {
-      5C0000009619E0BD0100000018000000030000000000030000005C0002496404
-      0001000000000014464B5F49444E6976656C4361706163696461646504000100
-      0000000011464B5F49444D65746147656E657269636104000100000000000000}
-    object cdsMetasGenericasXNiveisCapacidadeSelecionadasId: TIntegerField
-      FieldName = 'Id'
-    end
-    object cdsMetasGenericasXNiveisCapacidadeSelecionadasFK_IDNivelCapacidade: TIntegerField
-      FieldName = 'FK_IDNivelCapacidade'
-    end
-    object cdsMetasGenericasXNiveisCapacidadeSelecionadasFK_IDMetaGenerica: TIntegerField
-      FieldName = 'FK_IDMetaGenerica'
-    end
-    object cdsMetasGenericasXNiveisCapacidadeSelecionadasNomeMetaGenerica: TStringField
-      FieldKind = fkLookup
-      FieldName = 'NomeMetaGenerica'
-      LookupDataSet = cdsMetasGenericasCadastradas
-      LookupKeyFields = 'Id'
-      LookupResultField = 'Nome'
-      KeyFields = 'FK_IDMetaGenerica'
-      Size = 100
-      Lookup = True
-    end
-  end
-  object cdsMetasGenericasDisponiveis: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 168
-    Top = 104
-    object cdsMetasGenericasDisponiveisId: TIntegerField
-      FieldName = 'Id'
-    end
-    object cdsMetasGenericasDisponiveisNome: TStringField
-      FieldName = 'Nome'
-      Size = 100
-    end
-    object cdsMetasGenericasDisponiveissigla: TStringField
-      FieldName = 'sigla'
-      Size = 10
-    end
-    object cdsMetasGenericasDisponiveisDescricao: TMemoField
+    object cdsCadastroDescricao: TMemoField
       FieldName = 'Descricao'
       BlobType = ftMemo
     end
-    object cdsMetasGenericasDisponiveisDataCriacao: TDateTimeField
-      FieldName = 'DataCriacao'
+    object cdsCadastroFK_IdFormaRepresentacao: TIntegerField
+      FieldName = 'FK_IdFormaRepresentacao'
     end
   end
-  object dsMetasGenericasDisponiveis: TDataSource
-    DataSet = cdsMetasGenericasDisponiveis
-    Left = 168
-    Top = 152
-  end
-  object dsMetasGenericasXNiveisCapacidadeSelecionadas: TDataSource
-    DataSet = cdsMetasGenericasXNiveisCapacidadeSelecionadas
-    Left = 536
-    Top = 160
-  end
-  object cdsMetasGenericasCadastradas: TClientDataSet
-    Active = True
-    Aggregates = <>
-    Params = <>
-    Left = 304
-    Top = 104
-    Data = {
-      910000009619E0BD010000001800000005000000000003000000910002496404
-      00010000000000044E6F6D650100490000000100055749445448020002006400
-      057369676C610100490000000100055749445448020002000A00094465736372
-      6963616F04004B0000000100075355425459504502004900050054657874000B
-      446174614372696163616F08000800000000000000}
-    object IntegerField1: TIntegerField
-      FieldName = 'Id'
-    end
-    object StringField1: TStringField
-      FieldName = 'Nome'
-      Size = 100
-    end
-    object StringField2: TStringField
-      FieldName = 'sigla'
-      Size = 10
-    end
-    object MemoField1: TMemoField
-      FieldName = 'Descricao'
-      BlobType = ftMemo
-    end
-    object DateTimeField1: TDateTimeField
-      FieldName = 'DataCriacao'
-    end
-  end
-  object cdsModeloReferencia: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 304
-    Top = 176
-    object cdsModeloReferenciaId: TIntegerField
-      FieldName = 'Id'
-    end
-    object cdsModeloReferenciaNome: TStringField
-      FieldName = 'Nome'
-      Size = 100
-    end
-    object cdsModeloReferenciaDataCriacao: TDateTimeField
-      FieldName = 'DataCriacao'
-    end
-    object cdsModeloReferenciaInformacoesGerais: TBlobField
-      FieldName = 'InformacoesGerais'
-    end
-  end
-  object dsModeloReferencia: TDataSource
-    DataSet = cdsModeloReferencia
-    Left = 304
-    Top = 232
+  object dsFormaRepresentacao: TDataSource
+    DataSet = cdsFormaRepresentacao
+    Left = 344
+    Top = 240
   end
   object cdsFormaRepresentacao: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 96
-    Top = 288
+    Left = 344
+    Top = 184
     object cdsFormaRepresentacaoId: TIntegerField
       FieldName = 'Id'
     end
@@ -550,9 +423,83 @@ inherited frmCadastroNivelCapacidade: TfrmCadastroNivelCapacidade
       FieldName = 'DataCriacao'
     end
   end
-  object dsFormaRepresentacao: TDataSource
-    DataSet = cdsFormaRepresentacao
-    Left = 96
+  object cdsAreasProcessoDisponiveis: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 160
+    Top = 304
+    object cdsAreasProcessoDisponiveisId: TIntegerField
+      FieldName = 'Id'
+    end
+    object cdsAreasProcessoDisponiveisNome: TStringField
+      FieldName = 'Nome'
+      Size = 100
+    end
+    object cdsAreasProcessoDisponiveisDataCriacao: TDateTimeField
+      FieldName = 'DataCriacao'
+    end
+    object cdsAreasProcessoDisponiveisObjetivo: TMemoField
+      FieldName = 'Objetivo'
+      BlobType = ftMemo
+    end
+    object cdsAreasProcessoDisponiveisFK_IDModeloReferencia: TIntegerField
+      FieldName = 'FK_IDModeloReferencia'
+    end
+    object cdsAreasProcessoDisponiveisFK_IDCategoria: TIntegerField
+      FieldName = 'FK_IDCategoria'
+    end
+  end
+  object dsAreasProcessoDisponiveis: TDataSource
+    DataSet = cdsAreasProcessoDisponiveis
+    Left = 152
     Top = 344
+  end
+  object cdsNivelMaturidadeXAreasProcessoSelecionada: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    OnNewRecord = cdsNivelMaturidadeXAreasProcessoSelecionadaNewRecord
+    Left = 520
+    Top = 224
+    object cdsNivelMaturidadeXAreasProcessoSelecionadaId: TIntegerField
+      FieldName = 'Id'
+    end
+    object cdsNivelMaturidadeXAreasProcessoSelecionadaFK_IDNivelMaturidade: TIntegerField
+      FieldName = 'FK_IDNivelMaturidade'
+    end
+    object cdsNivelMaturidadeXAreasProcessoSelecionadaFK_IDAreaProcesso: TIntegerField
+      FieldName = 'FK_IDAreaProcesso'
+    end
+    object cdsNivelMaturidadeXAreasProcessoSelecionadaDescricaoAreaProcesso: TStringField
+      FieldKind = fkLookup
+      FieldName = 'DescricaoAreaProcesso'
+      LookupDataSet = cdsAreaProcessoCadastrada
+      LookupKeyFields = 'Id'
+      LookupResultField = 'Nome'
+      KeyFields = 'FK_IDAreaProcesso'
+      Size = 100
+      Lookup = True
+    end
+  end
+  object dsNivelMaturidadeXAreasProcessoSelecionada: TDataSource
+    DataSet = cdsNivelMaturidadeXAreasProcessoSelecionada
+    Left = 520
+    Top = 272
+  end
+  object cdsAreaProcessoCadastrada: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 312
+    Top = 280
+    Data = {
+      100100009619E0BD010000001800000006000200000003000000AB0002496404
+      00010010000000044E6F6D650100490010000100055749445448020002006400
+      0B446174614372696163616F0800080010000000084F626A657469766F04004B
+      00100001000753554254595045020049000500546578740015464B5F49444D6F
+      64656C6F5265666572656E63696104000100100000000E464B5F494443617465
+      676F726961040001001000000000000000000100000012417265612064652050
+      726F636573736F203100D7A4AE30ECCC42050000007465737465010000000100
+      00000000000200000011417265612064652050726F636573736F32806485B130
+      ECCC420500000074657374650100000001000000}
   end
 end

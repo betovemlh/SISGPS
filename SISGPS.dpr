@@ -12,8 +12,11 @@ uses
   ConfiguracoesSistema in 'Source\ConfiguracoesSistema.pas' {frmConfiguracoesSistema},
   UVariaveis in 'Template\UVariaveis.pas',
   CadastroMetaGenerica in 'Source\CadastroMetaGenerica.pas' {frmCadastroMetaGenerica},
-  CadastroMetasEPraticasEspecificas in 'Source\CadastroMetasEPraticasEspecificas.pas' {frmCadastroMetasEPraticasEspecificas},
-  CadastroNivelCapacidade in 'Source\CadastroNivelCapacidade.pas' {frmCadastroNivelCapacidade};
+  CadastroMetasEspecificas in 'Source\CadastroMetasEspecificas.pas' {frmCadastroMetasEspecificas},
+  CadastroNivelCapacidade in 'Source\CadastroNivelCapacidade.pas' {frmCadastroNivelCapacidade},
+  CadastroNivelMaturidade in 'Source\CadastroNivelMaturidade.pas' {frmCadastroNivelMaturidade},
+  CadastroCategoria in 'Source\CadastroCategoria.pas' {frmCadastroCategoria},
+  CadastroPraticasEspecificas in 'Source\CadastroPraticasEspecificas.pas' {frmCadastroPraticasEspecificas};
 
 {$R *.res}
 

@@ -44,6 +44,20 @@ type
     DateTimeField1: TDateTimeField;
     cdsMetasGenericasXNiveisCapacidadeSelecionadasNomeMetaGenerica: TStringField;
     dbgrd3: TDBGrid;
+    lbl6: TLabel;
+    dblkcbbFK_IdAreaProcesso: TDBLookupComboBox;
+    cdsModeloReferencia: TClientDataSet;
+    dsModeloReferencia: TDataSource;
+    cdsModeloReferenciaId: TIntegerField;
+    cdsModeloReferenciaNome: TStringField;
+    cdsModeloReferenciaDataCriacao: TDateTimeField;
+    cdsModeloReferenciaInformacoesGerais: TBlobField;
+    cdsCadastroFK_IDModeloReferencia: TIntegerField;
+    cdsFormaRepresentacao: TClientDataSet;
+    dsFormaRepresentacao: TDataSource;
+    cdsFormaRepresentacaoId: TIntegerField;
+    cdsFormaRepresentacaoNome: TStringField;
+    cdsFormaRepresentacaoDataCriacao: TDateTimeField;
     procedure FormCreate(Sender: TObject);
     procedure cdsCadastroNewRecord(DataSet: TDataSet);
     procedure cdsMetasGenericasXNiveisCapacidadeSelecionadasNewRecord(
@@ -62,6 +76,8 @@ type
     procedure LoadMetasCadastradas();
     procedure   GravarLigacaoMetasGenericasXNiveisCapacidade();
     procedure ExcluiLigacaoMetasGenericasNiveisCapacidade(IdNivelCapacidade:integer);
+    procedure LoadModeloReferencia();
+    procedure LoadFormaRepresentacao();
   public
     { Public declarations }
   end;
@@ -157,6 +173,8 @@ begin
   LoadMetasCadastradas();
   LoadMetasGenericasSelecionadas(0);
   LoadMetasGenericasDisponiveis();
+  LoadModeloReferencia();
+  LoadFormaRepresentacao();
 end;
 
 procedure TfrmCadastroNivelCapacidade.GravarLigacaoMetasGenericasXNiveisCapacidade;
@@ -267,6 +285,44 @@ begin
     on E:Exception do
     begin
       Application.MessageBox(Pchar('Ocorreu o seguinte erro ao carregar as Metas Genericas Cadastradas : '+#13#10+E.Message),
+                             Pchar(Application.Title),MB_ICONERROR);
+    end;
+
+  End;
+end;
+
+procedure TfrmCadastroNivelCapacidade.LoadModeloReferencia;
+begin
+  Try
+    cdsModeloReferencia.Close();
+    if FileExists(PathBaseDadosXML+XMLModeloReferencia) then
+      cdsModeloReferencia.LoadFromFile(PathBaseDadosXML+XMLModeloReferencia)
+    else
+      cdsModeloReferencia.CreateDataSet();
+    cdsModeloReferencia.Open();
+  Except
+    on E:Exception do
+    begin
+      Application.MessageBox(Pchar('Ocorreu o seguinte erro ao carregar os modelos de referência: '+#13#10+E.Message),
+                             Pchar(Application.Title),MB_ICONERROR);
+    end;
+
+  End;
+end;
+
+procedure TfrmCadastroNivelCapacidade.LoadFormaRepresentacao;
+begin
+  Try
+    cdsFormaRepresentacao.Close();
+    if FileExists(PathBaseDadosXML+XMLFormaRepresentacao) then
+      cdsFormaRepresentacao.LoadFromFile(PathBaseDadosXML+XMLFormaRepresentacao)
+    else
+      cdsFormaRepresentacao.CreateDataSet();
+    cdsFormaRepresentacao.Open();
+  Except
+    on E:Exception do
+    begin
+      Application.MessageBox(Pchar('Ocorreu o seguinte erro ao carregar as formas de representação: '+#13#10+E.Message),
                              Pchar(Application.Title),MB_ICONERROR);
     end;
 

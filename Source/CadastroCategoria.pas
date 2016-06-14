@@ -1,27 +1,25 @@
-unit CadastroAreaProcesso;
+unit CadastroCategoria;
 
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, TemplateCadastro, DB, DBClient, StdCtrls, Buttons, Grids, DBGrids,
-  ComCtrls, ExtCtrls, Mask, DBCtrls;
+  ComCtrls, ExtCtrls, Mask, DBCtrls,UVariaveis;
 
 type
-  TfrmCadastroAreaProcesso = class(TfrmCadastroTemplate)
+  TfrmCadastroCategoria = class(TfrmCadastroTemplate)
     cdsCadastroId: TIntegerField;
+    cdsCadastroDataCriacao: TDateTimeField;
     cdsCadastroNome: TStringField;
-    cdsCadastroObjetivo: TMemoField;
-    dbmmoInformacoesGerais: TDBMemo;
-    lbl4: TLabel;
-    dbedtDataCriacao: TDBEdit;
-    lbl3: TLabel;
     dbedtNome: TDBEdit;
     lbl2: TLabel;
     dbedtId: TDBEdit;
     lbl1: TLabel;
-    cdsCadastroDataCriacao: TDateTimeField;
+    dbedtDataCriacao1: TDBEdit;
+    lbl5: TLabel;
     procedure FormCreate(Sender: TObject);
+    procedure cdsCadastroNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
     function permiteGravar():Boolean;override;
@@ -31,32 +29,35 @@ type
   end;
 
 var
-  frmCadastroAreaProcesso: TfrmCadastroAreaProcesso;
+  frmCadastroCategoria: TfrmCadastroCategoria;
 
 implementation
 
 {$R *.dfm}
 
-procedure TfrmCadastroAreaProcesso.FormCreate(Sender: TObject);
+procedure TfrmCadastroCategoria.cdsCadastroNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+  cdsCadastroDataCriacao.AsDateTime := now();
+end;
+
+procedure TfrmCadastroCategoria.FormCreate(Sender: TObject);
 begin
   CampoPrimario := 'id';
-  CaminhoTabelaXML := ExtractFilePath(Application.ExeName)+'\dados\AreaProcesso.xml';
+  TabelaXML := XMLCategoria;
   inherited;
 end;
 
-function TfrmCadastroAreaProcesso.permiteExcluir: Boolean;
+function TfrmCadastroCategoria.permiteExcluir: Boolean;
 begin
   Result := true;
 end;
 
-function TfrmCadastroAreaProcesso.permiteGravar: Boolean;
+function TfrmCadastroCategoria.permiteGravar: Boolean;
 begin
-  Result := false;
+   Result := false;
   if cdsCadastroNome.IsNull then
     Application.MessageBox(Pchar('Nome não pode ser vazio'),
-                           Pchar(Application.Title),MB_ICONEXCLAMATION)
-  else if  cdsCadastroDataCriacao.IsNull then
-    Application.MessageBox(Pchar('Data não pode ser vazia'),
                            Pchar(Application.Title),MB_ICONEXCLAMATION)
   else
     Result := true;

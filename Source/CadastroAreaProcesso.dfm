@@ -6,7 +6,7 @@ inherited frmCadastroAreaProcesso: TfrmCadastroAreaProcesso
   TextHeight = 13
   inherited pnl2: TPanel
     inherited pgControl: TPageControl
-      ActivePage = tabConsulta
+      ActivePage = tabCadastro
       inherited tabConsulta: TTabSheet
         ExplicitLeft = 4
         ExplicitTop = 24
@@ -46,7 +46,7 @@ inherited frmCadastroAreaProcesso: TfrmCadastroAreaProcesso
         ExplicitHeight = 460
         object lbl4: TLabel [0]
           Left = 3
-          Top = 88
+          Top = 137
           Width = 39
           Height = 13
           Caption = 'Objetivo'
@@ -72,11 +72,25 @@ inherited frmCadastroAreaProcesso: TfrmCadastroAreaProcesso
           Height = 13
           Caption = 'Data de Cria'#231#227'o'
         end
+        object lbl6: TLabel [4]
+          Left = 4
+          Top = 96
+          Width = 105
+          Height = 13
+          Caption = 'Modelo de Refer'#234'ncia'
+        end
+        object lbl3: TLabel [5]
+          Left = 380
+          Top = 95
+          Width = 45
+          Height = 13
+          Caption = 'Categoria'
+        end
         object dbmmoInformacoesGerais: TDBMemo
           Left = 3
-          Top = 107
+          Top = 156
           Width = 658
-          Height = 307
+          Height = 262
           DataField = 'Objetivo'
           DataSource = dsCadastro
           TabOrder = 2
@@ -114,6 +128,30 @@ inherited frmCadastroAreaProcesso: TfrmCadastroAreaProcesso
           ReadOnly = True
           TabOrder = 4
         end
+        object dblkcbbFK_IdAreaProcesso: TDBLookupComboBox
+          Left = 3
+          Top = 110
+          Width = 350
+          Height = 21
+          DataField = 'FK_IDModeloReferencia'
+          DataSource = dsCadastro
+          KeyField = 'Id'
+          ListField = 'Nome'
+          ListSource = dsModeloReferencia
+          TabOrder = 5
+        end
+        object dblkcbbFK_IDModeloReferencia: TDBLookupComboBox
+          Left = 379
+          Top = 110
+          Width = 282
+          Height = 21
+          DataField = 'FK_IDCategoria'
+          DataSource = dsCadastro
+          KeyField = 'Id'
+          ListField = 'Nome'
+          ListSource = dsCategoria
+          TabOrder = 6
+        end
       end
     end
   end
@@ -133,5 +171,33 @@ inherited frmCadastroAreaProcesso: TfrmCadastroAreaProcesso
       FieldName = 'Objetivo'
       BlobType = ftMemo
     end
+    object cdsCadastroFK_IDModeloReferencia: TIntegerField
+      FieldName = 'FK_IDModeloReferencia'
+    end
+    object cdsCadastroFK_IDCategoria: TIntegerField
+      FieldName = 'FK_IDCategoria'
+    end
+  end
+  object cdsModeloReferencia: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 144
+    Top = 248
+  end
+  object dsModeloReferencia: TDataSource
+    DataSet = cdsModeloReferencia
+    Left = 144
+    Top = 304
+  end
+  object cdsCategoria: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 328
+    Top = 248
+  end
+  object dsCategoria: TDataSource
+    DataSet = cdsCategoria
+    Left = 320
+    Top = 296
   end
 end

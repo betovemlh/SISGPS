@@ -1,10 +1,17 @@
 inherited frmCadastroFormaRepresentacao: TfrmCadastroFormaRepresentacao
   Caption = 'Cadastro Forma de Representa'#231#227'o'
+  ExplicitWidth = 680
+  ExplicitHeight = 518
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnl2: TPanel
     inherited pgControl: TPageControl
+      ActivePage = tabCadastro
       inherited tabConsulta: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 664
+        ExplicitHeight = 460
         inherited dbgrd1: TDBGrid
           Columns = <
             item
@@ -27,6 +34,10 @@ inherited frmCadastroFormaRepresentacao: TfrmCadastroFormaRepresentacao
         end
       end
       inherited tabCadastro: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 664
+        ExplicitHeight = 460
         object lbl2: TLabel [0]
           Left = 3
           Top = 48
@@ -47,6 +58,13 @@ inherited frmCadastroFormaRepresentacao: TfrmCadastroFormaRepresentacao
           Width = 9
           Height = 13
           Caption = 'Id'
+        end
+        object lbl6: TLabel [3]
+          Left = 4
+          Top = 96
+          Width = 105
+          Height = 13
+          Caption = 'Modelo de Refer'#234'ncia'
         end
         object dbedtNome: TDBEdit
           Left = 3
@@ -81,6 +99,18 @@ inherited frmCadastroFormaRepresentacao: TfrmCadastroFormaRepresentacao
           ReadOnly = True
           TabOrder = 3
         end
+        object dblkcbbFK_IdAreaProcesso: TDBLookupComboBox
+          Left = 3
+          Top = 110
+          Width = 350
+          Height = 21
+          DataField = 'FK_IDModeloReferencia'
+          DataSource = dsCadastro
+          KeyField = 'Id'
+          ListField = 'Nome'
+          ListSource = dsModeloReferencia
+          TabOrder = 4
+        end
       end
     end
   end
@@ -95,5 +125,19 @@ inherited frmCadastroFormaRepresentacao: TfrmCadastroFormaRepresentacao
     object cdsCadastroDataCriacao: TDateTimeField
       FieldName = 'DataCriacao'
     end
+    object cdsCadastroFK_IDModeloReferencia: TIntegerField
+      FieldName = 'FK_IDModeloReferencia'
+    end
+  end
+  object cdsModeloReferencia: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 144
+    Top = 248
+  end
+  object dsModeloReferencia: TDataSource
+    DataSet = cdsModeloReferencia
+    Left = 144
+    Top = 304
   end
 end

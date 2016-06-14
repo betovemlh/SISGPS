@@ -16,6 +16,11 @@ const
   XMLModeloReferencia:String='ModeloReferencia.xml';
   XMLNivelCapacidade:String='NivelCapacidade.xml';
   XMLNivelCapacidadeXMetasGenericas:String= 'NivelCapacidadeXMetasGenericas.xml';
+  XMLMetasEspecificas:String='MetasEspecificas.xml';
+  XMLPraticasEspecificas:String='PraticasEspecificas.xml';
+  XMLCategoria:String='Categoria.xml';
+  XMLNivelMaturidade:String='NivelMaturidade.xml';
+  XMLNivelMaturidadeXAreaProcesso:String='NivelMaturidadeXAreaProcesso.xml';
  var  PathBaseDadosXML:String;
 
 

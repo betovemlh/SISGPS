@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, StdCtrls, ComCtrls, Buttons;
+  Dialogs, ExtCtrls, StdCtrls, ComCtrls, Buttons, dxGDIPlusClasses;
 
 type
   TfrmTelaPrincipal = class(TForm)
@@ -21,6 +21,18 @@ type
     btn6: TBitBtn;
     btn7: TBitBtn;
     btn8: TBitBtn;
+    btn9: TBitBtn;
+    btn10: TBitBtn;
+    btn11: TBitBtn;
+    shp1: TShape;
+    shp2: TShape;
+    shp3: TShape;
+    shp5: TShape;
+    shp4: TShape;
+    shp6: TShape;
+    shp7: TShape;
+    btn12: TBitBtn;
+    shp8: TShape;
     procedure tmr1Timer(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
@@ -31,6 +43,9 @@ type
     procedure btn6Click(Sender: TObject);
     procedure btn7Click(Sender: TObject);
     procedure btn8Click(Sender: TObject);
+    procedure btn10Click(Sender: TObject);
+    procedure btn9Click(Sender: TObject);
+    procedure btn11Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,9 +59,30 @@ implementation
 
 uses CadastroModeloReferencia, CadastroAreaProcesso, CadastroFormaRepresentacao,
   ConfiguracoesSistema,UVariaveis, CadastroMetaGenerica,
-  CadastroMetasEPraticasEspecificas, CadastroNivelCapacidade;
+  CadastroMetasEspecificas, CadastroNivelCapacidade, CadastroCategoria,
+  CadastroNivelMaturidade, CadastroPraticasEspecificas;
 
 {$R *.dfm}
+
+procedure TfrmTelaPrincipal.btn10Click(Sender: TObject);
+begin
+  Try
+    Application.CreateForm(TfrmCadastroCategoria,frmCadastroCategoria);
+    frmCadastroCategoria.ShowModal();
+  Finally
+    frmCadastroCategoria.Free;
+  End;
+end;
+
+procedure TfrmTelaPrincipal.btn11Click(Sender: TObject);
+begin
+  Try
+    Application.CreateForm(TfrmCadastroPraticasEspecificas,frmCadastroPraticasEspecificas);
+    frmCadastroPraticasEspecificas.ShowModal();
+  Finally
+    frmCadastroPraticasEspecificas.Free;
+  End;
+end;
 
 procedure TfrmTelaPrincipal.btn1Click(Sender: TObject);
 begin
@@ -106,10 +142,10 @@ end;
 procedure TfrmTelaPrincipal.btn7Click(Sender: TObject);
 begin
   Try
-    Application.CreateForm(TfrmCadastroMetasEPraticasEspecificas,frmCadastroMetasEPraticasEspecificas);
-    frmCadastroMetasEPraticasEspecificas.ShowModal();
+    Application.CreateForm(TfrmCadastroMetasEspecificas,frmCadastroMetasEspecificas);
+    frmCadastroMetasEspecificas.ShowModal();
   Finally
-    frmCadastroMetasEPraticasEspecificas.Free;
+    frmCadastroMetasEspecificas.Free;
   End;
 end;
 
@@ -120,6 +156,16 @@ begin
     frmCadastroNivelCapacidade.ShowModal();
   Finally
     frmCadastroNivelCapacidade.Free;
+  End;
+end;
+
+procedure TfrmTelaPrincipal.btn9Click(Sender: TObject);
+begin
+  Try
+    Application.CreateForm(TFrmCadastroNivelMaturidade,FrmCadastroNivelMaturidade);
+    FrmCadastroNivelMaturidade.ShowModal();
+  Finally
+    FrmCadastroNivelMaturidade.Free;
   End;
 end;
 

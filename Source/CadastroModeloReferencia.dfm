@@ -1,17 +1,17 @@
 inherited frmCadastroModeloReferencia: TfrmCadastroModeloReferencia
   Caption = 'Cadastro Modelo de Referencia'
-  ExplicitWidth = 320
-  ExplicitHeight = 240
+  ExplicitWidth = 680
+  ExplicitHeight = 518
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnl2: TPanel
     inherited pgControl: TPageControl
       ActivePage = tabCadastro
       inherited tabConsulta: TTabSheet
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 664
+        ExplicitHeight = 460
         inherited dbgrd1: TDBGrid
           Columns = <
             item
@@ -40,10 +40,10 @@ inherited frmCadastroModeloReferencia: TfrmCadastroModeloReferencia
         end
       end
       inherited tabCadastro: TTabSheet
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 664
+        ExplicitHeight = 460
         object lbl1: TLabel [0]
           Left = 3
           Top = 8

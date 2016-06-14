@@ -18,12 +18,18 @@ type
     lbl5: TLabel;
     dbedtId: TDBEdit;
     lbl1: TLabel;
+    dblkcbbFK_IdAreaProcesso: TDBLookupComboBox;
+    lbl6: TLabel;
+    cdsModeloReferencia: TClientDataSet;
+    dsModeloReferencia: TDataSource;
+    cdsCadastroFK_IDModeloReferencia: TIntegerField;
     procedure FormCreate(Sender: TObject);
     procedure cdsCadastroNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
     function permiteGravar():Boolean;override;
     function permiteExcluir():Boolean;override;
+    procedure LoadModeloReferencia();
   public
     { Public declarations }
   end;
@@ -48,6 +54,7 @@ begin
   CampoPrimario := 'id';
   TabelaXML :=XMLFormaRepresentacao;
   inherited;
+  LoadModeloReferencia();
 end;
 
 function TfrmCadastroFormaRepresentacao.permiteExcluir: Boolean;
@@ -66,6 +73,25 @@ begin
                            Pchar(Application.Title),MB_ICONEXCLAMATION)
   else
     Result := true;
+end;
+
+procedure TfrmCadastroFormaRepresentacao.LoadModeloReferencia();
+begin
+  Try
+    cdsModeloReferencia.Close();
+    if FileExists(PathBaseDadosXML+XMLModeloReferencia) then
+      cdsModeloReferencia.LoadFromFile(PathBaseDadosXML+XMLModeloReferencia)
+    else
+      cdsModeloReferencia.CreateDataSet();
+    cdsModeloReferencia.Open();
+  Except
+    on E:Exception do
+    begin
+      Application.MessageBox(Pchar('Ocorreu o seguinte erro ao carregar os Modelos de Referencia : '+#13#10+E.Message),
+                             Pchar(Application.Title),MB_ICONERROR);
+    end;
+
+  End;
 end;
 
 end.

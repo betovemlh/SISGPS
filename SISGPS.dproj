@@ -20,6 +20,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>vclx;vcl;dbrtl;Rave76VCL;bdertl;rtl;vclactnband;vcldb;vcldbx;dsnap;dsnapcon;TeeUI;TeeDB;Tee;adortl;vclib;ibxpress;IndyCore;IndySystem;IndyProtocols;xmlrtl;inet;intrawebdb_100_120;Intraweb_100_120;VclSmp;vclie;websnap;webdsnap;inetdbbde;inetdbxpress;soaprtl;vclribbon;dbexpress;DbxCommonDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;DataSnapServer;DbxClientDriver;DBXInterBaseDriver;DBXMySQLDriver;dbxcds;DBXSybaseASEDriver;DBXSybaseASADriver;DBXOracleDriver;DBXMSSQLDriver;DBXInformixDriver;DBXDb2Driver;ProgressThreadD2009;rxctl;rxdb;rxbde;PivotCube;dclExcelExportPack12;WinSkinD2009;dxCoreRS21;cxLibraryRS21;dxGDIPlusRS21;dxThemeRS21;cxEditorsRS21;cxDataRS21;dxLayoutControlRS21;cxPageControlRS21;cxGridRS21;DBCheckGridD2009;SynEdit_R2009;uniGUI12;uniGUI12Ex;uniGUI12Chart;AnyDAC_PhysSQLite_D12;AnyDAC_Phys_D12;AnyDAC_ComI_D12;AnyDAC_PhysPg_D12;AnyDAC_PhysIB_D12;AnyDAC_PhysTDBX_D12;AnyDAC_PhysADS_D12;AnyDAC_PhysASA_D12;AnyDAC_PhysODBC_D12;AnyDAC_PhysOracle_D12;AnyDAC_PhysMySQL_D12;AnyDAC_PhysDb2_D12;AnyDAC_PhysMSSQL_D12;AnyDAC_PhysMSAcc_D12;AnyDAC_GUIxForms_D12;AnyDAC_Comp_D12;RaudusD120;MultiLookupD2009;QR5Run_RAD6;dclfdsD2009;DSPack_D12;DirectX9_D12;EhLib120;EhLibDataDrivers120;DCLSerD2009;VCLSerD2009;RLReport_D2009;MSNPopUpD2009;NativeExcelD2009;pkNomes;dclStorageScript;CronometroWFTD2009;FilterWFTD2009;TFindFile_D2009;ThemeManagerD2009;ThemeManagerD2009D;ToolTipManagerD2009;ReportWFTD2009;fqb120;fs12;frx12;Workflow_D2009;AcroPDF;frxcs12;fsDB12;frxDB12;fsBDE12;frxBDE12;fsADO12;frxADO12;fsIBX12;frxIBX12;frxDBX12;frxe12;fsTee12;frxTee12;dclRBE1512;rbCIDE1512;rbIDE1512;rbRCL1512;rbBDE1512;rbUSERDesign1512;rbUSER1512;rbDIDE1512;rbDAD1512;dclRBBDE1512;rbDBDE1512;rbDB1512;dclRBADO1512;rbADO1512;rbRIDE1512;rbRAP1512;rbTCUI1512;rbTC1512;dclRBIBE1512;rbIBE1512;dclRBDBE1512;rbDBE1512;ComumpackD2009;BaseFormsD2009;ImagesPackD2009;dxBarRS21;dxComnRS21;dxBarDBNavRS21;dxBarExtDBItemsRS21;dxBarExtItemsRS21;dxRibbonRS21;cxTreeListRS21;dxTabbedMDIRS21;dxServerModeRS21;dxorgcRS21;dxdborRS21;dxdbtrRS21;dxFlowChartRS21;dxmdsRS21;cxExportRS21;cxPivotGridChartRS21;cxPivotGridRS21;dxPSCoreRS21;dxPsPrVwAdvRS21;dxPScxPCProdRS21;dxPSDBTeeChartRS21;dxPSTeeChartRS21;dxPSLnksRS21;dxPSdxDBTVLnkRS21;dxPSdxDBOCLnkRS21;dxPSdxOCLnkRS21;dxPSdxFCLnkRS21;dxPSPrVwRibbonRS21;cxSchedulerRS21;cxSchedulerGridRS21;dxtrmdRS21;dxWizardControlRS21;dxDBXServerModeRS21</DCC_UsePackage>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
 			<DCC_DependencyCheckOutputName>SISGPS.exe</DCC_DependencyCheckOutputName>
 			<DCC_ImageBase>00400000</DCC_ImageBase>
@@ -63,11 +64,20 @@
 			<DCCReference Include="Source\CadastroMetaGenerica.pas">
 				<Form>frmCadastroMetaGenerica</Form>
 			</DCCReference>
-			<DCCReference Include="Source\CadastroMetasEPraticasEspecificas.pas">
-				<Form>frmCadastroMetasEPraticasEspecificas</Form>
+			<DCCReference Include="Source\CadastroMetasEspecificas.pas">
+				<Form>frmCadastroMetasEspecificas</Form>
 			</DCCReference>
 			<DCCReference Include="Source\CadastroNivelCapacidade.pas">
 				<Form>frmCadastroNivelCapacidade</Form>
+			</DCCReference>
+			<DCCReference Include="Source\CadastroNivelMaturidade.pas">
+				<Form>frmCadastroNivelMaturidade</Form>
+			</DCCReference>
+			<DCCReference Include="Source\CadastroCategoria.pas">
+				<Form>frmCadastroCategoria</Form>
+			</DCCReference>
+			<DCCReference Include="Source\CadastroPraticasEspecificas.pas">
+				<Form>frmCadastroPraticasEspecificas</Form>
 			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
@@ -123,6 +133,29 @@
 						<VersionInfoKeys Name="Comments"/>
 					</VersionInfoKeys>
 					<Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dclcxEditorsRS21.bpl">ExpressEditors Library by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dclcxGridRS21.bpl">ExpressQuantumGrid by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dclcxPivotGridRS21.bpl">ExpressPivotGrid by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dcldxLayoutControlRS21.bpl">ExpressLayout Control by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dclcxTreeListdxBarPopupMenuRS21.bpl">ExpressQuantumTreeList dxBar Built-In Menu by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dclcxTreeListRS21.bpl">ExpressQuantumTreeList by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dcldxADOServerModeRS21.bpl">ADO Data Source for ExpressDataController Server Mode by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dclcxGridWizardRS21.bpl">ExpressQuantumGrid Wizard by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dclcxPivotGridOLAPRS21.bpl">ExpressPivotGrid OLAP by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dclcxSchedulerRibbonStyleEventEditorRS21.bpl">ExpressScheduler Ribbon Event Window by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dclcxSchedulerTreeBrowserRS21.bpl">ExpressScheduler tree browser by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dcldxPScxCommonRS21.bpl">ExpressPrinting System Cross Platform Library by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dcldxPScxExtCommonRS21.bpl">ExpressPrinting System Extended Cross Platform Library by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dcldxPScxGridLnkRS21.bpl">ExpressPrinting System ReportLink for ExpressQuantumGrid by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dcldxPSdxLCLnkRS21.bpl">ExpressPrinting System ReportLink for ExpressLayoutControl by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dcldxPScxPivotGridLnkRS21.bpl">ExpressPrinting System ReportLink for ExpressPivotGrid by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dcldxPScxSchedulerLnkRS21.bpl">ExpressPrinting System ReportLink for ExpressScheduler by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dcldxPScxTLLnkRS21.bpl">ExpressPrinting System ReportLink for ExpressQuantumTreeList by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dcldxPScxVGridLnkRS21.bpl">ExpressPrinting System ReportLink for ExpressVerticalGrid by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dclcxEditorFieldLinkRS21.bpl">ExpressEditors FieldLink by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dclcxBarEditItemRS21.bpl">ExpressBars cxEditor item by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dcldxFireDACServerModeRS21.bpl">FireDAC Data Source for ExpressDataController Server Mode by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\dclcxVerticalGridRS21.bpl">ExpressVerticalGrid by Developer Express Inc.</Excluded_Packages>
 						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\WeatherfordD2009.bpl">WFT Component Weatherford D2009</Excluded_Packages>
 						<Excluded_Packages Name="$(BDS)\bin\dcloffice2k120.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
 						<Excluded_Packages Name="$(BDS)\bin\dclofficexp120.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
